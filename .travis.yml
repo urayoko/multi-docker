@@ -3,21 +3,21 @@ services:
     - docker
 
 before_install: 
-    - docker build -t uyoko/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t urayoko/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    # - docker run uyoko/react-test npm run test -- --coverage        # not working anymore
-    - docker run -e CI=true uyoko/react-test npm run test
+    # - docker run urayoko/react-test npm run test -- --coverage        # not working anymore
+    - docker run -e CI=true urayoko/react-test npm run test
 
 after_success:
-    - docker build -t uyoko/multi-client ./client
-    - docker build -t uyoko/multi-nginx ./nginx
-    - docker build -t uyoko/multi-server ./server
-    - docker build -t uyoko/multi-worker ./worker
+    - docker build -t urayoko/multi-client ./client
+    - docker build -t urayoko/multi-nginx ./nginx
+    - docker build -t urayoko/multi-server ./server
+    - docker build -t urayoko/multi-worker ./worker
     # Log in to the docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # Take images and push to docker hub
-    - docker push uyoko/multi-client
-    - docker push uyoko/multi-nginx 
-    - docker push uyoko/multi-server
-    - docker push uyoko/multi-worker
+    - docker push urayoko/multi-client
+    - docker push urayoko/multi-nginx 
+    - docker push urayoko/multi-server
+    - docker push urayoko/multi-worker
